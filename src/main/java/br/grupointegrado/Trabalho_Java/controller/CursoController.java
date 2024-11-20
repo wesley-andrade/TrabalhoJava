@@ -3,6 +3,7 @@ package br.grupointegrado.Trabalho_Java.controller;
 import br.grupointegrado.Trabalho_Java.dto.CursoRequestDTO;
 import br.grupointegrado.Trabalho_Java.model.Curso;
 import br.grupointegrado.Trabalho_Java.repository.CursoRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class CursoController {
     }
 
     @PostMapping
-    public Curso save(@RequestBody CursoRequestDTO dto){
+    public Curso save(@RequestBody @Valid CursoRequestDTO dto){
         Curso curso = new Curso();
 
         curso.setNome(dto.nome());
@@ -41,7 +42,7 @@ public class CursoController {
     }
 
     @PutMapping("/{id}")
-    public Curso update(@PathVariable Integer id, @RequestBody CursoRequestDTO dto){
+    public Curso update(@PathVariable Integer id, @RequestBody @Valid CursoRequestDTO dto){
         Curso curso = this.repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado!"));
 

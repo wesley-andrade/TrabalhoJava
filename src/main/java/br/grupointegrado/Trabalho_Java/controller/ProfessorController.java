@@ -3,6 +3,7 @@ package br.grupointegrado.Trabalho_Java.controller;
 import br.grupointegrado.Trabalho_Java.dto.ProfessorRequestDTO;
 import br.grupointegrado.Trabalho_Java.model.Professor;
 import br.grupointegrado.Trabalho_Java.repository.ProfessorRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class ProfessorController {
     }
 
     @PostMapping
-    public Professor save(@RequestBody ProfessorRequestDTO dto){
+    public Professor save(@RequestBody @Valid ProfessorRequestDTO dto){
         Professor professor = new Professor();
 
         professor.setNome(dto.nome());
@@ -42,7 +43,7 @@ public class ProfessorController {
     }
 
     @PutMapping("/{id}")
-    public Professor update(@PathVariable Integer id, @RequestBody ProfessorRequestDTO dto){
+    public Professor update(@PathVariable Integer id, @RequestBody @Valid ProfessorRequestDTO dto){
         Professor professor = this.repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("O professor não foi encontrado!"));
 

@@ -3,6 +3,7 @@ package br.grupointegrado.Trabalho_Java.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "turmas")
@@ -12,12 +13,15 @@ public class Turma {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotNull(message = "O ano não pode ficar vazio")
+    @Min(2000)
     @Column(nullable = false)
     private Integer ano;
 
-    @Column(nullable = false)
+    @NotNull(message = "O semestre não pode ficar vazio")
     @Min(1)
     @Max(2)
+    @Column(nullable = false)
     private Integer semestre;
 
     @ManyToOne

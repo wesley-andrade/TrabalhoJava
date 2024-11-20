@@ -1,6 +1,10 @@
 package br.grupointegrado.Trabalho_Java.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
@@ -12,15 +16,23 @@ public class Aluno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotBlank(message = "O nome não pode ficar vazio")
+    @Size(min = 3, max = 100)
     @Column(nullable = false)
     private String nome;
 
+    @NotBlank(message = "O email não pode ficar vazio")
+    @Email(message = "O email deve ser válido", regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
+    @Size(max = 100)
     @Column(nullable = false, unique = true)
     private String email;
 
+    @NotBlank(message = "A matricula não pode ficar vazia")
+    @Size(max = 20)
     @Column(nullable = false, unique = true)
     private String matricula;
 
+    @Past(message = "A data de nascimento deve ser no passado")
     @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
 

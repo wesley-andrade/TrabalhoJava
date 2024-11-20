@@ -3,6 +3,7 @@ package br.grupointegrado.Trabalho_Java.controller;
 import br.grupointegrado.Trabalho_Java.dto.AlunoRequestDTO;
 import br.grupointegrado.Trabalho_Java.model.Aluno;
 import br.grupointegrado.Trabalho_Java.repository.AlunoRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class AlunoController {
     }
 
     @PostMapping
-    public Aluno save(@RequestBody AlunoRequestDTO dto){
+    public Aluno save(@RequestBody @Valid AlunoRequestDTO dto){
         Aluno aluno = new Aluno();
 
         aluno.setNome(dto.nome());
@@ -42,7 +43,7 @@ public class AlunoController {
     }
 
     @PutMapping("/{id}")
-    public Aluno update(@PathVariable Integer id, @RequestBody AlunoRequestDTO dto){
+    public Aluno update(@PathVariable Integer id, @RequestBody @Valid AlunoRequestDTO dto){
         Aluno aluno = this.repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("O aluno não foi encontrado!"));
 

@@ -5,6 +5,7 @@ import br.grupointegrado.Trabalho_Java.model.Curso;
 import br.grupointegrado.Trabalho_Java.model.Turma;
 import br.grupointegrado.Trabalho_Java.repository.CursoRepository;
 import br.grupointegrado.Trabalho_Java.repository.TurmaRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class TurmaController {
     }
 
     @PostMapping
-    public Turma save(@RequestBody TurmaRequestDTO dto){
+    public Turma save(@RequestBody @Valid TurmaRequestDTO dto){
         Curso curso = this.cursoRepository.findById(dto.cursoId())
                 .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado!"));
 
@@ -49,7 +50,7 @@ public class TurmaController {
     }
 
     @PutMapping("/{id}")
-    public Turma update(@PathVariable Integer id, @RequestBody TurmaRequestDTO dto){
+    public Turma update(@PathVariable Integer id, @RequestBody @Valid TurmaRequestDTO dto){
         Turma turma = this.repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Turma não encontrada!"));
 
