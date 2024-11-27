@@ -7,6 +7,7 @@ import br.grupointegrado.Trabalho_Java.model.Professor;
 import br.grupointegrado.Trabalho_Java.repository.CursoRepository;
 import br.grupointegrado.Trabalho_Java.repository.DisciplinaRepository;
 import br.grupointegrado.Trabalho_Java.repository.ProfessorRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class DisciplinaController {
     }
 
     @PostMapping
-    public Disciplina save (@RequestBody DisciplinaRequestDTO dto){
+    public Disciplina save (@RequestBody @Valid DisciplinaRequestDTO dto){
         Curso curso = cursoRepository.findById(dto.cursoId())
                 .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado!"));
 
@@ -58,7 +59,7 @@ public class DisciplinaController {
     }
 
     @PutMapping("/{id}")
-    public Disciplina update (@PathVariable Integer id, @RequestBody DisciplinaRequestDTO dto){
+    public Disciplina update (@PathVariable Integer id, @RequestBody @Valid DisciplinaRequestDTO dto){
         Disciplina disciplina = this.repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Disciplina não encontrada!"));
 

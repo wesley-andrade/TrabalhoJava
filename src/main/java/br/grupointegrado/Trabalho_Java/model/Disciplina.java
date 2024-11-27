@@ -1,6 +1,8 @@
 package br.grupointegrado.Trabalho_Java.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "disciplinas")
@@ -10,9 +12,13 @@ public class Disciplina {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotNull(message = "O nome não pode ficar vazio")
+    @Size(max = 100)
     @Column(nullable = false)
     private String nome;
 
+    @NotNull(message = "O codigo não pode ficar vazio")
+    @Size(max = 20)
     @Column(nullable = false)
     private String codigo;
 
