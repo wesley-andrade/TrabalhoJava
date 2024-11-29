@@ -1,6 +1,7 @@
 package br.grupointegrado.Trabalho_Java.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "matriculas")
@@ -10,10 +11,12 @@ public class Matricula {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotNull(message = "O campo não pode ficar vazio")
     @ManyToOne
     @JoinColumn(name = "aluno_id", nullable = false)
     private Aluno aluno;
 
+    @NotNull(message = "O campo não pode ficar vazio")
     @ManyToOne
     @JoinColumn(name = "turma_id", nullable = false)
     private Turma turma;

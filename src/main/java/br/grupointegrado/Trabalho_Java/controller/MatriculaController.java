@@ -7,6 +7,7 @@ import br.grupointegrado.Trabalho_Java.model.Turma;
 import br.grupointegrado.Trabalho_Java.repository.AlunoRepository;
 import br.grupointegrado.Trabalho_Java.repository.MatriculaRepository;
 import br.grupointegrado.Trabalho_Java.repository.TurmaRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class MatriculaController {
     }
 
     @PostMapping
-    public ResponseEntity<Matricula> save (@RequestBody MatriculaRequestDTO dto){
+    public ResponseEntity<Matricula> save (@RequestBody @Valid MatriculaRequestDTO dto){
         Aluno aluno = this.alunoRepository.findById(dto.alunoId())
                 .orElseThrow(() -> new IllegalArgumentException("Aluno não encontrado!"));
 
@@ -55,7 +56,7 @@ public class MatriculaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Matricula> update (@PathVariable Integer id, @RequestBody MatriculaRequestDTO dto){
+    public ResponseEntity<Matricula> update (@PathVariable Integer id, @RequestBody @Valid MatriculaRequestDTO dto){
         Matricula matricula = this.repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Matricula não encontrada!"));
 
