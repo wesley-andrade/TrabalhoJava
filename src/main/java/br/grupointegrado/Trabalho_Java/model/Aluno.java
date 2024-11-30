@@ -1,5 +1,6 @@
 package br.grupointegrado.Trabalho_Java.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -38,6 +39,7 @@ public class Aluno {
     private LocalDate dataNascimento;
 
     @OneToMany(mappedBy = "alunoId")
+    @JsonIgnore
     private List<Matricula> matriculas;
 
     public Integer getId() {

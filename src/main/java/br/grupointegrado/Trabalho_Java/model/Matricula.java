@@ -1,5 +1,6 @@
 package br.grupointegrado.Trabalho_Java.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -24,6 +25,7 @@ public class Matricula {
     private Turma turmaId;
 
     @OneToMany(mappedBy = "matriculaId")
+    @JsonIgnore
     private List<Nota> notas;
 
     public Integer getId() {
