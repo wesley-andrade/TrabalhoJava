@@ -3,6 +3,8 @@ package br.grupointegrado.Trabalho_Java.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.List;
+
 @Entity
 @Table(name = "matriculas")
 public class Matricula {
@@ -20,6 +22,9 @@ public class Matricula {
     @ManyToOne
     @JoinColumn(name = "turma_id", nullable = false)
     private Turma turmaId;
+
+    @OneToMany(mappedBy = "matriculaId")
+    private List<Nota> notas;
 
     public Integer getId() {
         return id;
@@ -43,5 +48,13 @@ public class Matricula {
 
     public void setTurmaId(Turma turmaId) {
         this.turmaId = turmaId;
+    }
+
+    public List<Nota> getNotas() {
+        return notas;
+    }
+
+    public void setNotas(List<Nota> notas) {
+        this.notas = notas;
     }
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 @Entity
 @Table(name = "disciplinas")
 public class Disciplina {
@@ -29,6 +31,9 @@ public class Disciplina {
     @ManyToOne
     @JoinColumn(name = "professor_id", nullable = false)
     private Professor professorId;
+
+    @OneToMany(mappedBy = "disciplinaId")
+    private List<Nota> notas;
 
     public Integer getId() {
         return id;
@@ -68,5 +73,13 @@ public class Disciplina {
 
     public void setProfessorId(Professor professorId) {
         this.professorId = professorId;
+    }
+
+    public List<Nota> getNotas() {
+        return notas;
+    }
+
+    public void setNotas(List<Nota> notas) {
+        this.notas = notas;
     }
 }

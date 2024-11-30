@@ -1,5 +1,6 @@
 package br.grupointegrado.Trabalho_Java.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -7,6 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "notas")
+@JsonIgnoreProperties({"matriculaId", "disciplinaId"})
 public class Nota {
 
     @Id

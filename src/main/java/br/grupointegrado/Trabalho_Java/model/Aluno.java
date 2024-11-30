@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "alunos")
@@ -35,6 +36,9 @@ public class Aluno {
     @Past(message = "A data de nascimento deve ser no passado")
     @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
+
+    @OneToMany(mappedBy = "alunoId")
+    private List<Matricula> matriculas;
 
     public Integer getId() {
         return id;
@@ -74,5 +78,13 @@ public class Aluno {
 
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public List<Matricula> getMatriculas() {
+        return matriculas;
+    }
+
+    public void setMatriculas(List<Matricula> matriculas) {
+        this.matriculas = matriculas;
     }
 }
