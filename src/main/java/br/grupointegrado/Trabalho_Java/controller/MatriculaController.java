@@ -49,8 +49,8 @@ public class MatriculaController {
                 .orElseThrow(() -> new IllegalArgumentException("Turma não encontrado!"));
 
         Matricula matricula = new Matricula();
-        matricula.setAluno(aluno);
-        matricula.setTurma(turma);
+        matricula.setAlunoId(aluno);
+        matricula.setTurmaId(turma);
 
         return ResponseEntity.ok(this.repository.save(matricula));
     }
@@ -66,8 +66,8 @@ public class MatriculaController {
         Turma turma = this.turmaRepository.findById(dto.turmaId())
                 .orElseThrow(() -> new IllegalArgumentException("Turma não encontrado!"));
 
-        matricula.setAluno(aluno);
-        matricula.setTurma(turma);
+        matricula.setAlunoId(aluno);
+        matricula.setTurmaId(turma);
 
         return ResponseEntity.ok(this.repository.save(matricula));
     }

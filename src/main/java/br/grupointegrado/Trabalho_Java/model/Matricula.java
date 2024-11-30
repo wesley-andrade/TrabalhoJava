@@ -14,12 +14,12 @@ public class Matricula {
     @NotNull(message = "O campo não pode ficar vazio")
     @ManyToOne
     @JoinColumn(name = "aluno_id", nullable = false)
-    private Aluno aluno;
+    private Aluno alunoId;
 
     @NotNull(message = "O campo não pode ficar vazio")
     @ManyToOne
     @JoinColumn(name = "turma_id", nullable = false)
-    private Turma turma;
+    private Turma turmaId;
 
     public Integer getId() {
         return id;
@@ -29,19 +29,19 @@ public class Matricula {
         this.id = id;
     }
 
-    public Aluno getAluno() {
-        return aluno;
+    public Aluno getAlunoId() {
+        return alunoId;
     }
 
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
+    public void setAlunoId(Aluno alunoId) {
+        this.alunoId = alunoId;
     }
 
-    public Turma getTurma() {
-        return turma;
+    public Turma getTurmaId() {
+        return turmaId;
     }
 
-    public void setTurma(Turma turma) {
-        this.turma = turma;
+    public void setTurmaId(Turma turmaId) {
+        this.turmaId = turmaId;
     }
 }
