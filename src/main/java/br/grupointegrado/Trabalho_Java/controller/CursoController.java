@@ -31,18 +31,18 @@ public class CursoController {
     }
 
     @PostMapping
-    public Curso save(@RequestBody @Valid CursoRequestDTO dto){
+    public ResponseEntity<Curso> save(@RequestBody @Valid CursoRequestDTO dto){
         Curso curso = new Curso();
 
         curso.setNome(dto.nome());
         curso.setCodigo(dto.codigo());
         curso.setCargaHoraria(dto.cargaHoraria());
 
-        return this.repository.save(curso);
+        return ResponseEntity.ok(this.repository.save(curso));
     }
 
     @PutMapping("/{id}")
-    public Curso update(@PathVariable Integer id, @RequestBody @Valid CursoRequestDTO dto){
+    public ResponseEntity<Curso> update(@PathVariable Integer id, @RequestBody @Valid CursoRequestDTO dto){
         Curso curso = this.repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado!"));
 
@@ -50,7 +50,7 @@ public class CursoController {
         curso.setCodigo(dto.codigo());
         curso.setCargaHoraria(dto.cargaHoraria());
 
-        return this.repository.save(curso);
+        return ResponseEntity.ok(this.repository.save(curso));
     }
 
     @DeleteMapping("/{id}")

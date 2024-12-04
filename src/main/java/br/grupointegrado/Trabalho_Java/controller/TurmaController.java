@@ -36,7 +36,7 @@ public class TurmaController {
     }
 
     @PostMapping
-    public Turma save(@RequestBody @Valid TurmaRequestDTO dto){
+    public ResponseEntity<Turma> save(@RequestBody @Valid TurmaRequestDTO dto){
         Curso curso = this.cursoRepository.findById(dto.cursoId())
                 .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado!"));
 
@@ -46,11 +46,11 @@ public class TurmaController {
         turma.setSemestre(dto.semestre());
         turma.setCursoId(curso);
 
-        return this.repository.save(turma);
+        return ResponseEntity.ok(this.repository.save(turma));
     }
 
     @PutMapping("/{id}")
-    public Turma update(@PathVariable Integer id, @RequestBody @Valid TurmaRequestDTO dto){
+    public ResponseEntity<Turma> update(@PathVariable Integer id, @RequestBody @Valid TurmaRequestDTO dto){
         Turma turma = this.repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Turma não encontrada!"));
 
@@ -61,7 +61,7 @@ public class TurmaController {
         turma.setSemestre(dto.semestre());
         turma.setCursoId(curso);
 
-        return this.repository.save(turma);
+        return ResponseEntity.ok(this.repository.save(turma));
     }
 
     @DeleteMapping("/{id}")

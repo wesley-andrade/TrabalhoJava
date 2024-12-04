@@ -31,7 +31,7 @@ public class ProfessorController {
     }
 
     @PostMapping
-    public Professor save(@RequestBody @Valid ProfessorRequestDTO dto){
+    public ResponseEntity<Professor> save(@RequestBody @Valid ProfessorRequestDTO dto){
         Professor professor = new Professor();
 
         professor.setNome(dto.nome());
@@ -39,11 +39,11 @@ public class ProfessorController {
         professor.setTelefone(dto.telefone());
         professor.setEspecialidade(dto.especialidade());
 
-        return this.repository.save(professor);
+        return ResponseEntity.ok(this.repository.save(professor));
     }
 
     @PutMapping("/{id}")
-    public Professor update(@PathVariable Integer id, @RequestBody @Valid ProfessorRequestDTO dto){
+    public ResponseEntity<Professor> update(@PathVariable Integer id, @RequestBody @Valid ProfessorRequestDTO dto){
         Professor professor = this.repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("O professor não foi encontrado!"));
 
@@ -52,7 +52,7 @@ public class ProfessorController {
         professor.setTelefone(dto.telefone());
         professor.setEspecialidade(dto.especialidade());
 
-        return this.repository.save(professor);
+        return ResponseEntity.ok(this.repository.save(professor));
     }
 
     @DeleteMapping("/{id}")

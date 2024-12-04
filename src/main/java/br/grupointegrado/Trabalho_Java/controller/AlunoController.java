@@ -31,7 +31,7 @@ public class AlunoController {
     }
 
     @PostMapping
-    public Aluno save(@RequestBody @Valid AlunoRequestDTO dto){
+    public ResponseEntity<Aluno> save(@RequestBody @Valid AlunoRequestDTO dto){
         Aluno aluno = new Aluno();
 
         aluno.setNome(dto.nome());
@@ -39,11 +39,11 @@ public class AlunoController {
         aluno.setMatricula(dto.matricula());
         aluno.setDataNascimento(dto.dataNascimento());
 
-        return this.repository.save(aluno);
+        return ResponseEntity.ok(this.repository.save(aluno));
     }
 
     @PutMapping("/{id}")
-    public Aluno update(@PathVariable Integer id, @RequestBody @Valid AlunoRequestDTO dto){
+    public ResponseEntity<Aluno> update(@PathVariable Integer id, @RequestBody @Valid AlunoRequestDTO dto){
         Aluno aluno = this.repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("O aluno não foi encontrado!"));
 
@@ -52,7 +52,7 @@ public class AlunoController {
         aluno.setMatricula(dto.matricula());
         aluno.setDataNascimento(dto.dataNascimento());
 
-        return this.repository.save(aluno);
+        return ResponseEntity.ok(this.repository.save(aluno));
     }
 
     @DeleteMapping("/{id}")

@@ -41,7 +41,7 @@ public class DisciplinaController {
     }
 
     @PostMapping
-    public Disciplina save (@RequestBody @Valid DisciplinaRequestDTO dto){
+    public ResponseEntity<Disciplina> save (@RequestBody @Valid DisciplinaRequestDTO dto){
         Curso curso = cursoRepository.findById(dto.cursoId())
                 .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado!"));
 
@@ -55,11 +55,11 @@ public class DisciplinaController {
         disciplina.setCursoId(curso);
         disciplina.setProfessorId(professor);
 
-        return this.repository.save(disciplina);
+        return ResponseEntity.ok(this.repository.save(disciplina));
     }
 
     @PutMapping("/{id}")
-    public Disciplina update (@PathVariable Integer id, @RequestBody @Valid DisciplinaRequestDTO dto){
+    public ResponseEntity<Disciplina> update (@PathVariable Integer id, @RequestBody @Valid DisciplinaRequestDTO dto){
         Disciplina disciplina = this.repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Disciplina não encontrada!"));
 
@@ -74,7 +74,7 @@ public class DisciplinaController {
         disciplina.setCursoId(curso);
         disciplina.setProfessorId(professor);
 
-        return this.repository.save(disciplina);
+        return ResponseEntity.ok(this.repository.save(disciplina));
     }
 
     @DeleteMapping("/{id}")
