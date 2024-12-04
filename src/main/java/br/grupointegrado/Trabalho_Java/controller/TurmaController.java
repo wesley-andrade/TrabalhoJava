@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -37,6 +38,10 @@ public class TurmaController {
 
     @PostMapping
     public ResponseEntity<Turma> save(@RequestBody @Valid TurmaRequestDTO dto){
+        if (dto.ano() > LocalDate.now().getYear()) {
+            throw new IllegalArgumentException("O ano não pode ser maior que o ano atual.");
+        }
+
         Curso curso = this.cursoRepository.findById(dto.cursoId())
                 .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado!"));
 
@@ -51,6 +56,10 @@ public class TurmaController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Turma> update(@PathVariable Integer id, @RequestBody @Valid TurmaRequestDTO dto){
+        if (dto.ano() > LocalDate.now().getYear()) {
+            throw new IllegalArgumentException("O ano não pode ser maior que o ano atual.");
+        }
+
         Turma turma = this.repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Turma não encontrada!"));
 
